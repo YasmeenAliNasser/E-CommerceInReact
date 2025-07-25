@@ -124,7 +124,7 @@ export default function Home() {
           </h1>
           <hr className=" w-1/6 m-auto text-gray-300 mt-5  h-4" />
         </div>
-        <div className="container ">
+        <div className="container "> 
           {loading ? (
             <Loader />
           ) : (

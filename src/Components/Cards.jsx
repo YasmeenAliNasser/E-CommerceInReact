@@ -8,7 +8,6 @@ export default function Card({ product }) {
   let { addProductToCart } = useContext(CartContextVar);
   let { favorites, addProductToFav, deleteProduct } = useContext(FavContext);
 
-   
   const isInFavorites =
     Array.isArray(favorites) &&
     favorites.some((item) => item._id === product._id);
@@ -22,7 +21,6 @@ export default function Card({ product }) {
           alt={product.slug}
         />
         <div className="layer flex justify-center items-center gap-4">
-         
           <div
             onClick={() =>
               isInFavorites
@@ -38,7 +36,6 @@ export default function Card({ product }) {
             />
           </div>
 
-          
           <div
             onClick={() => {
               addProductToCart(product._id);
@@ -61,7 +58,6 @@ export default function Card({ product }) {
             </svg>
           </div>
 
-          
           <Link to={`/productdetails/${product._id}`}>
             <div className="circle size-9 bg-green-500 flex justify-center items-center rounded-4xl">
               <Eye className="text-white" />
@@ -70,12 +66,21 @@ export default function Card({ product }) {
         </div>
 
         {/* خصم */}
-        <span className="absolute top-2 left-2 p-2 rounded-2xl">
-          <span className="flex flex-col items-center font-bold text-orange-400">
-            <span className="text-sm font-normal whitespace-nowrap">50%</span>
-            <span className="text-sm text-primary">Sale</span>
+        {product.priceAfterDiscount && (
+          <span className="absolute top-0 left-2 p-2 bg-darkPrimary rounded-full rounded-tl-none">
+            <span className="flex flex-col items-center font-bold text-orange-400">
+              <span className="text-sm font-normal whitespace-nowrap">
+                {Math.round(
+                  ((product.price - product.priceAfterDiscount) /
+                    product.price) *
+                    100
+                )}
+                %
+              </span>
+              <span className="text-sm text-primary">Sale</span>
+            </span>
           </span>
-        </span>
+        )}
       </div>
 
       <div className="">
