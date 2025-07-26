@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Card from '../Components/Cards';
 import { FaArrowLeft } from 'react-icons/fa';
+import Loader from '../Components/Loader';
 
 export default function CategoryDetails() {
   const { id } = useParams();
@@ -11,6 +12,7 @@ export default function CategoryDetails() {
   const [products, setProducts] = useState([]);
 
   async function getCategoryDetails() {
+     setLoading(true);
     try {
       const { data } = await axios.get(`https://ecommerce.routemisr.com/api/v1/categories/${id}`);
       setCategory(data.data);
@@ -39,7 +41,7 @@ export default function CategoryDetails() {
     <div className="container mx-auto py-10 text-center   pt-24">
      
       {loading ? (
-        <p className="text-center text-lg">Loading Category details...</p>
+    <Loader/>
       ) : (
         <>
         <Link

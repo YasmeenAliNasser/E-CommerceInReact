@@ -159,7 +159,7 @@ export default function Products() {
           showSidebar ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* زر إغلاق */}
+       
         <button
           onClick={() => setShowSidebar(false)}
           className="absolute top-4 right-4 text-red-500 text-2xl"

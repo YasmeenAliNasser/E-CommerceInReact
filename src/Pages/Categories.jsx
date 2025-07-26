@@ -1,6 +1,7 @@
  import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Components/Loader";
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -9,6 +10,7 @@ export default function Categories() {
   const navigate = useNavigate();
 
   async function getCategories() {
+     setLoading(true);
     try {
       const { data } = await axios.get(
         "https://ecommerce.routemisr.com/api/v1/categories"
@@ -44,7 +46,7 @@ export default function Categories() {
       <div className="container mx-auto py-10 px-4">
         <h2 className="text-3xl font-bold mb-8 text-center">All Categories</h2>
         {loading ? (
-          <p className="text-center">Loading...</p>
+        <Loader/>
         ) : (
           <>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">

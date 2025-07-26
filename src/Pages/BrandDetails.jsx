@@ -2,6 +2,7 @@
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Card from '../Components/Cards';
+import Loader from '../Components/Loader';
 
 export default function BrandDetails() {
   const { id } = useParams();
@@ -10,6 +11,7 @@ export default function BrandDetails() {
   const [products, setProducts] = useState([]);
 
   async function getBrandDetails() {
+       setLoading(true);
     try {
       const { data } = await axios.get(`https://ecommerce.routemisr.com/api/v1/brands/${id}`);
       setBrand(data.data);
@@ -38,7 +40,7 @@ export default function BrandDetails() {
   return (
     <div className="container mx-auto  py-10 text-center">
       {loading ? (
-        <p className="text-center text-lg">Loading brand details...</p>
+      <Loader />
       ) : (
         <>
         
